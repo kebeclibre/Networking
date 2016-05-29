@@ -31,7 +31,7 @@ public class Client {
 					String resp = scan.nextLine();
 					proto.write(resp);
 			
-					System.out.println(resp);
+					//System.out.println(resp);
 				}else if (st.equals("STOP")) {
 					success = true;
 					sok.close();
