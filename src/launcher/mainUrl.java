@@ -34,7 +34,7 @@ public class mainUrl {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Serv.readInt("192.168.22.109");
+		Serv.readInt("127.0.0.1");
 		
 	}
 		

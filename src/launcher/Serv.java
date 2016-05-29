@@ -17,15 +17,14 @@ public class Serv {
 		
 		while (!finished) {
 			try {
-				ServerSocket serv = new ServerSocket(7100);
+				ServerSocket serv = new ServerSocket(7000);
 				Socket client = serv.accept();
 				System.out.println("wow"+client.getInetAddress());
 				OutputStream out = client.getOutputStream();
-				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(out));
-				bw.write(""+Random110.randomNum());
-				bw.flush();
-				bw.close();
-				
+				PrintWriter pw = new PrintWriter(out,true);
+				pw.write(""+Random110.randomNum());
+				pw.close();
+				serv.close();
 		
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -55,27 +54,21 @@ public class Serv {
 	}
 	
 	public static void readInt(String ip) {
-		int re = 0;
-		Socket num = null;
 		try {
-			num = new Socket(ip,7100);
+			Socket num = new Socket(ip,7000);
+			StringBuffer sb = new StringBuffer();
+			InputStream in = num.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String s = "";
+			while ((s = br.readLine()) != null) {
+				sb.append(s);
+			}
+			num.close();
+			System.out.println(ip+" : "+sb.toString());
 		} catch (IOException e1) {
 			System.out.println("Unreachable Int " + ip);
-		
-		StringBuffer sb = new StringBuffer();
-			try {
-				
-				InputStream in = num.getInputStream();
-				BufferedReader br = new BufferedReader(new InputStreamReader(in));
-				String s = "";
-				while ((s = br.readLine()) != null) {
-					sb.append(s);
-				}
-			} catch (IOException e) {
-				System.out.println("Other");
-			}
 			
-		System.out.println(ip+" : "+sb.toString());
+		
 	}
 	
 	}}
